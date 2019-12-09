@@ -16,6 +16,8 @@ custom:
 
 provider:
   name: aws
+  profile: datastream-development
+  stage: api
   runtume: nodejs12.x
   region: ca-central-1
   versionFunctions: false

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "serverless deploy --SLS_DEBUG=* --verbose --force --stage=\"api\" --aws-profile=\"datastream-development\"",
-      "remove":"serverless remove --SLS_DEBUG=* --verbose --force --stage=\"api\" --aws-profile=\"datastream-development\""
+    "deploy": "serverless deploy --SLS_DEBUG=* --verbose --force",
+    "remove":"serverless remove --SLS_DEBUG=* --verbose --force"
   },
   "repository": {
     "type": "git",

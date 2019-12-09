@@ -4,20 +4,22 @@ const middy = require('./middy')
 const RDS = require('aws-sdk').RDS
 //End Global
 
-const handler = middy((event, context) => ({}))
-	.use((opts) => {
-		// Start Option
+const middleware = (opts) => {
+	// Start Option
 
-		//End Option
-		return {
-			before: (handler, next) => {
-				// Start Function
+	//End Option
+	return {
+		before: (handler, next) => {
+			// Start Function
 
-				//End Function
-				next()
-			}
+			//End Function
+			next()
 		}
-	})
+	}
+}
+
+const handler = middy( async  (event, context) => ({}))
+	.use(middleware())
 
 
 

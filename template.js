@@ -4,8 +4,7 @@ const middy = require('./middy')
 
 //End Global
 
-const handler = middy((event, context) => ({}))
-	.use((opts) => {
+const middleware = (opts) => {
 		// Start Option
 
 		//End Option
@@ -17,7 +16,10 @@ const handler = middy((event, context) => ({}))
 				next()
 			}
 		}
-	})
+	}
+
+const handler = middy( async (event, context) => ({}))
+	.use(middleware())
 
 
 
