@@ -1,0 +1,28 @@
+{
+  "name": "middy-serverless-perf",
+  "version": "1.0.0",
+  "description": "Test to see the best way to include deps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "serverless deploy --SLS_DEBUG=* --verbose --force --stage=\"api\" --aws-profile=\"datastream-development\"",
+      "remove":"serverless remove --SLS_DEBUG=* --verbose --force --stage=\"api\" --aws-profile=\"datastream-development\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://willfarrell@github.com/willfarrell/middy-serverless-perf.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willfarrell/middy-serverless-perf/issues"
+  },
+  "homepage": "https://github.com/willfarrell/middy-serverless-perf#readme",
+  "devDependencies": {
+    "serverless": "1.59.3",
+    "serverless-plugin-warmup": "4.7.1-rc.1"
+  },
+  "dependencies": {
+    "once": "1.4.0"
+  }
+}
