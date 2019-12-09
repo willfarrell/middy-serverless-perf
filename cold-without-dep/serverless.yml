@@ -1,0 +1,72 @@
+service: cold-without-sdk
+
+plugins:
+  - serverless-plugin-warmup
+
+custom:
+  vpc:
+    securityGroupIds:
+      - "${ssm:/infrastructure/vpc/security_group~true}"
+    subnetIds: { 'Fn::Split': [ ",", "${ssm:/infrastructure/vpc/private_subnets~true}" ] }
+  warmup:
+    enabled: true
+    concurrency: 1
+    prewarm: true
+    vpc: true
+    events:
+      - schedule: 'cron(0/16 * * * ? *)'
+
+provider:
+  name: aws
+  profile: datastream-development
+  stage: api
+  runtume: nodejs12.x
+  region: ca-central-1
+  versionFunctions: false
+  environment:
+    MIDDY_DEBUG: TRUE
+  iamRoleStatements:
+    # serverless-plugin-warmup
+    - Effect: 'Allow'
+      Action:
+        - 'lambda:InvokeFunction'
+      Resource:
+        - Fn::Join:
+            - ':'
+            - - arn:aws:lambda
+              - Ref: AWS::Region
+              - Ref: AWS::AccountId
+              - function:${self:service}-${opt:stage, self:provider.stage}-*
+
+package:
+  excludeDevDependencies: true
+
+functions:
+  global:
+    memorySize: 128
+    timeout: 5
+    handler: global.handler
+  option:
+    memorySize: 128
+    timeout: 5
+    handler: option.handler
+  function:
+    memorySize: 128
+    timeout: 5
+    handler: function.handler
+  
+  vpc-global:
+    memorySize: 128
+    timeout: 5
+    vpc: "${self:custom.vpc}"
+    handler: global.handler
+  vpc-option:
+    memorySize: 128
+    timeout: 5
+    vpc: "${self:custom.vpc}"
+    handler: option.handler
+  vpc-function:
+    memorySize: 128
+    timeout: 5
+    vpc: "${self:custom.vpc}"
+    handler: function.handler

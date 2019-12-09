@@ -1,4 +1,4 @@
-service: middy-without-sdk
+service: warm-with-sdk
 
 plugins:
   - serverless-plugin-warmup
