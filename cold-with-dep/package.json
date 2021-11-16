@@ -23,7 +23,7 @@
     "serverless-plugin-warmup": "4.7.1-rc.1"
   },
   "dependencies": {
-    "aws-sdk": "2.585.0",
+    "aws-sdk": "2.814.0",
     "once": "1.4.0"
   }
 }
